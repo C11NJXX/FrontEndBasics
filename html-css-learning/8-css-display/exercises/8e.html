@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>8e</title>
+    <style>
+        p {
+            font-size: 30px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input1,.input2 {
+            display: block;
+            background-color: rgb(208, 204, 204);
+            width: 280px;
+            border: none;
+            padding: 6px 10px;
+        }
+        .input1::placeholder,.input2::placeholder {
+            color: white;
+        }
+        .input1 {
+            margin-bottom: 5px;
+        }
+        .input2 {
+            margin-bottom: 10px;
+        }
+        .btn1 {
+            background-color: black;
+            color: white;
+            margin-right: 10px;
+            padding: 6px;
+        }
+        .btn2 {
+            background-color: rgb(208, 204, 204);
+            padding: 6px;
+        }
+        .btn1,.btn2 {
+            font-size: 8px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <p>Request a ride now</p>
+    <input class="input1" type="text" placeholder="Enter pickup location">
+    <input class="input2" type="text" placeholder="Enter Destination">
+    <button class="btn1">Request now</button>
+    <button class="btn2">Schedule for later</button>
+</body>
+</html>

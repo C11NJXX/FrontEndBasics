@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>13a</title>
+    <style>
+        .flex {
+            height: 100px;
+            display: flex;
+        }
+        .item1 {
+            width: 100px;
+            background-color: lightpink;
+        }
+        .item2 {
+            width: 200px;
+            background-color: lightblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .row2 {
+            display: flex;
+            justify-content: space-between;
+        }
+        .inside-row2 {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <div class="item1">
+        </div>
+        <div class="item2">
+            <div class="row1">row1</div>
+            <div class="row2">
+                <div class="inside-row2">row2</div>
+                <div class="inside-row2">row2</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

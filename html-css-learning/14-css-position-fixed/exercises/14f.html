@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>14f</title>
+    <style>
+        body {
+            padding-left: 80px;
+            height: 1500px;
+        }
+        .left-bar {
+            background-color: lightpink;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+        .img1,.img2,.img3 {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 30px;
+            margin-bottom: 6px;
+        }
+        .middle-bar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 80px;
+            width: 200px;
+            background-color: lightblue;
+            display: flex;
+            flex-direction: column;
+        }
+        .top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 0px 20px;
+            align-items: center;
+            color: white;
+        }
+        .tags {
+            margin-left: 20px;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-bar">
+        <img src="img/cat.jpg" class="img1">
+        <img src="img/cat2.jpg" class="img2">
+        <img src="img/dog.jpg" class="img3">
+    </div>
+    <div class="middle-bar">
+        <div class="top">
+            <p>INFO</p>
+            <p style="color: gray;">+</p>
+        </div>
+        <div class="tags">
+            <p># new-videos</p>
+            <p># updates</p>
+            <p># faq</p>
+        </div>
+    </div>
+</body>
+</html>

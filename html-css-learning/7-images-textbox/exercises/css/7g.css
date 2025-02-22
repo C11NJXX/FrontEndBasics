@@ -1,0 +1,32 @@
+img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+p {
+    vertical-align: middle;
+    font-size: 15px;
+    color: grey;
+}
+
+button {
+    vertical-align: middle;
+    margin-left: 170px;
+    padding:3px 13px;
+    height: 26px;
+    background-color: rgba(0, 229, 255,0.8);
+    border: none;
+    border-radius: 13px;
+    color: white;
+}
+
+p,
+img,
+button {
+    display: inline;
+}

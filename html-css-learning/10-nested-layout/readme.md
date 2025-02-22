@@ -1,0 +1,2 @@
+这一章学习了最基础的一些布局思路
+vertical and horizontal

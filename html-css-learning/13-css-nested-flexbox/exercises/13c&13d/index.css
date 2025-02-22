@@ -1,0 +1,86 @@
+.outside {
+    width: 400px;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 2px 10px;
+}
+
+.cat1 {
+    width: 380px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 15px;
+}
+
+.cat2 {
+    width: 380px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.dog {
+    width: 380px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.title {
+    margin-top: 10px;
+    color: grey;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.detail {
+    width: 100%;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+
+.detail-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-detail-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.right-detail-title {
+    color: grey;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.detail-brief {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.detail-body {
+    margin-top: 6px;
+    font-size: 14px;
+    color: grey;
+}

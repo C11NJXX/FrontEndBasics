@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+}
+.outside {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    column-gap: 10px;
+}
+.picture {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.friend-picture {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 15px;
+}
+.friend-nums {
+    display: inline-block;
+    vertical-align: middle;
+    color: grey;
+    font-size: 18px;
+}
+.name {
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+.add {
+    margin-top: 15px;
+    padding: 12px 60px;
+    margin-left: 25px;
+    font-size: 25px;
+    color: white;
+    background-color: rgb(0, 119, 255);
+    border: none;
+    border-radius: 10px;
+    /* transition: margin-top 0.5s, box-shadow 0.5s; */
+    transition: transform 0.5s,box-shadow 0.5s;
+}
+.add:hover {
+    cursor: pointer;
+    /* margin-top: 20px; */
+    transform: translateY(5px);
+}
+.add:active {
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+.cat1,
+.cat2,
+.dog {
+    /* width: 300px; */
+    height: 480px;
+    border: 1px solid black;
+    /* display: inline-block; */
+}
