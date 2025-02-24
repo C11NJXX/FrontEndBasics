@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>CartQuantity</title>
+</head>
+
+<body>
+    <button onclick="
+        if(cartQuantity + 4 > 10) {
+            console.log('The cart is full after adding 4 carts');
+        } else {
+            cartQuantity += 4;
+        }
+        console.log(`cartQuantity = ${cartQuantity}`);
+    ">+4</button>
+    <button onclick="
+        if(cartQuantity + 5 > 10) {
+            console.log('The cart is full after adding 5 carts');
+        } else {
+            cartQuantity += 5;
+        }
+        console.log(`cartQuantity = ${cartQuantity}`);
+    ">+5</button>
+    <button onclick="
+        if(cartQuantity - 1 < 0) {
+            console.log('The cart cannot have less than 0 items');
+        } else {
+            cartQuantity--;
+        }
+        console.log(`cartQuantity = ${cartQuantity}`);
+    ">Remove from cart</button>
+    <button onclick="
+        if(cartQuantity - 2 < 0) {
+            console.log('The cart cannot have less than 0 items');
+        } else {
+            cartQuantity -= 2;
+        }
+        console.log(`cartQuantity = ${cartQuantity}`);
+    ">-2</button>
+    <button onclick="
+        if(cartQuantity - 3 < 0) {
+            console.log('The cart cannot have less than 0 items');
+        } else {
+            cartQuantity -= 3;
+        }
+        console.log(`cartQuantity = ${cartQuantity}`);
+    ">-3</button>
+    <script>
+        let cartQuantity = 0;
+    </script>
+
+</html>
