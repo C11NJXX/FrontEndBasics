@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>9d</title>
+</head>
+<body>
+    <input type="text" placeholder="Name" class="nameInput" onkeydown="handleClickShowName(event)">
+    <button onclick="showName()">Submit</button>
+    <p></p>
+    <script>
+        function showName() {
+            const name = document.querySelector('.nameInput').value;
+            document.querySelector('p').innerHTML = `Your name is ${name}`;
+        }
+        function handleClickShowName(event) {
+            if(event.key === 'Enter') {
+                showName();
+            }
+        }
+    </script>
+</body>
+</html>

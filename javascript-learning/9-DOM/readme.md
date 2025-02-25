@@ -1,0 +1,9 @@
+这一章学习了DOM(document object model)
+dom的话就是整个页面，提供了一个内置对象:document
+从dom里获取的value都是string类型
+区别event和eventListener
+event：click keydown
+eventListener： onclick onkeydown
+每一个eventListener都会获得一个event对象
+window也是一个内置对象，它包含整个浏览器窗口，像document，console，alert都在其中
+不需要特别写window，js会自动添加（如果没有添加的话）

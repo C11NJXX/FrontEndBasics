@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>9h</title>
+</head>
+<body>
+    <input type="text" class="inputText" onkeyup="showText()">
+    <p class="text"></p>
+    <script>
+        function showText() {
+            document.querySelector('.text').innerHTML = document.querySelector('.inputText').value;
+        }
+    </script>
+</body>
+</html>

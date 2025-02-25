@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>9c</title>
+</head>
+<body>
+    <button class="btn1" onclick="click1();">heads</button>
+    <button class="btn2" onclick="click2();">tails</button>
+    <p></p>
+    <script>
+        const textElement = document.querySelector('p');
+        function click1() {
+            textElement.innerHTML = 'You chose: heads';
+        }
+        function click2() {
+            textElement.innerHTML = 'You chose: tails';
+        }
+    </script>
+</body>
+</html>
