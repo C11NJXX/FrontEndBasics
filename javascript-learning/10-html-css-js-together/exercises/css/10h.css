@@ -1,0 +1,16 @@
+.money {
+    width: 200px;
+    padding: 6px 5px;
+}
+
+.calculate {
+    padding: 8px 20px;
+    background-color: lightgreen;
+    border: none;
+    border-radius: 5px;
+    margin-left: 3px;
+}
+
+.error-message {
+    color: red;
+}

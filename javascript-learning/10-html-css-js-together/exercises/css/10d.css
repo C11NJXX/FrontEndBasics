@@ -1,0 +1,10 @@
+.game-button,.is-toggled {
+    border: none;
+    background-color: rgb(240, 240, 240);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.is-toggled {
+    background-color: lightblue;
+}
