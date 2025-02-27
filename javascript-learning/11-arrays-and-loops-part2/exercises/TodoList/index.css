@@ -1,0 +1,36 @@
+body {
+    font-family: Arial;
+}
+
+.todo-input,
+.todo-item {
+    display: grid;
+    grid-template-columns: 300px 200px 100px;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.todo-input {
+    margin-bottom: 20px;
+}
+
+.todo-input-name {
+    font-size: 15px;
+    padding: 10px 0 10px 5px
+}
+.todo-input-add-button,
+.todo-item-delete-button {
+    border: none;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.todo-input-add-button {
+    background-color: lightgreen;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.todo-item-delete-button {
+    background-color: lightcoral;
+}
