@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>12g</title>
+</head>
+
+<body>
+    <button class="js-add-button">Add</button>
+    <button class="js-remove-button">Remove</button>
+    <script>
+        let newsCount = 0;
+        const add = function () {
+            newsCount++;
+        }
+        const remove = function () {
+            newsCount--;
+        }
+        document.querySelector('.js-add-button').addEventListener('click', () => {
+            add();
+        });
+        document.querySelector('.js-remove-button').addEventListener('click', () => {
+            remove();
+        });
+        setInterval(() => {
+            if (document.title === '12g' && newsCount > 0) {
+                document.title = `(${newsCount}) New messages`;
+            } else {
+                document.title = '12g';
+            }
+        }, 1000)
+    </script>
+</body>
+
+</html>

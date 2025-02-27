@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>12g</title>
+</head>
+<body>
+    <button onclick="add();">Add</button>
+    <button onclick="remove();">Remove</button>
+    <script>
+        let newsCount = 0;
+        const add = function() {
+            newsCount++;
+        }
+        const remove = function() {
+            newsCount--;
+        }
+        setInterval(() => {
+            if(document.title === '12g' && newsCount > 0) {
+                document.title = `(${newsCount}) New messages`;
+            }else {
+                document.title = '12g';
+            }
+        },1000)
+    </script>
+</body>
+</html>
