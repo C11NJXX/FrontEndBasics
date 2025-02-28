@@ -21,6 +21,13 @@ img {
     border-radius: 80px;
     margin-right: 10px;
     margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+.move-button:hover {
+    background-color: lightpink;
+}
+.move-button:active {
+    background-color: lightblue;
 }
 
 .result {

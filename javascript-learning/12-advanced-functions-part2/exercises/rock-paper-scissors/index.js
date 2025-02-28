@@ -4,21 +4,54 @@ let score = JSON.parse(localStorage.getItem('score')) || {
     losses: 0,
     ties: 0
 };
-
 let intervalId = 0;
+const autoPlayButtonElement = document.querySelector('.js-auto-play-button');
 
-//add three eventListener to three buttons
-document.querySelector('.js-rock-button').addEventListener('click', () => {
-    playGame('rock');
-});
-document.querySelector('.js-paper-button').addEventListener('click', () => {
-    playGame('paper');
-});
-document.querySelector('.js-scissors-button').addEventListener('click', () => {
-    playGame('scissors');
-});
+renderScoreHTML();
+renderGameDetail();
+addEventListenerToButtons();
 
-document.querySelector('.js-reset-button').addEventListener('click', () => {
+function addEventListenerToButtons() {
+    //add r p s a backSpace key press down listener
+    document.body.addEventListener('keydown', (event) => {
+        if (event.key === 'r') {
+            playGame('rock');
+        } else if (event.key === 'p') {
+            playGame('paper');
+        } else if (event.key === 's') {
+            playGame('scissors');
+        } else if (event.key === 'a') {
+            autoPlayByPressKey();
+        } else if (event.key === 'Backspace') {
+            renderHint();
+        };
+    })
+
+    //add three eventListener to three buttons
+    document.querySelector('.js-rock-button').addEventListener('click', () => {
+        playGame('rock');
+    });
+    document.querySelector('.js-paper-button').addEventListener('click', () => {
+        playGame('paper');
+    });
+    document.querySelector('.js-scissors-button').addEventListener('click', () => {
+        playGame('scissors');
+    });
+    document.querySelector('.js-reset-button').addEventListener('click', () => {
+        renderHint();
+    });
+    autoPlayButtonElement.addEventListener('click', () => {
+        if (autoPlayButtonElement.textContent === 'Auto Play') {
+            autoPlayButtonElement.textContent = 'Stop Auto Play';
+            autoPlay();
+        } else {
+            //remove interval and change the text inside the button
+            autoPlayButtonElement.textContent = 'Auto Play';
+            clearInterval(intervalId);
+        }
+    })
+}
+function renderHint() {
     //show the hint
     document.querySelector('.js-reset-hint').innerHTML = `
     <p style="display: inline-block;">Are you sure you want to reset the score?</p>
@@ -31,17 +64,14 @@ document.querySelector('.js-reset-button').addEventListener('click', () => {
         score = { wins: 0, losses: 0, ties: 0 };
         localStorage.setItem('score', JSON.stringify(score));
         renderScoreHTML();
+        renderGameDetail();
+        document.querySelector('.js-reset-hint').innerHTML = '';
     });
     document.querySelector('.js-reset-not-confirm-button').addEventListener('click', () => {
         document.querySelector('.js-reset-hint').innerHTML = '';
-
     });
-
-});
-
-const autoPlayButtonElement = document.querySelector('.js-auto-play-button');
-
-autoPlayButtonElement.addEventListener('click', () => {
+}
+function autoPlayByPressKey() {
     if (autoPlayButtonElement.textContent === 'Auto Play') {
         autoPlayButtonElement.textContent = 'Stop Auto Play';
         autoPlay();
@@ -50,14 +80,13 @@ autoPlayButtonElement.addEventListener('click', () => {
         autoPlayButtonElement.textContent = 'Auto Play';
         clearInterval(intervalId);
     }
-})
+}
 function autoPlay() {
     intervalId = setInterval(() => {
         const playMove = pickComputerMove();
         playGame(playMove);
     }, 1000)
 }
-
 function playGame(playerMove) {
     //create the computer move;
     const computerMove = pickComputerMove();
@@ -85,7 +114,10 @@ function playGame(playerMove) {
     //show score on the page
     renderScoreHTML();
 }
-
+function renderGameDetail() {
+    document.querySelector('.result').innerHTML = "Let's start!";
+    document.querySelector('.game-detail').innerHTML = "Your Pick - Computer's Pick";
+}
 function renderScoreHTML() {
     document.querySelector('.game-score').innerHTML = `Wins:${score.wins}, Losses:${score.losses}, Ties:${score.ties}`;
 }
@@ -101,7 +133,6 @@ function pickComputerMove() {
     }
     return computerMove;
 }
-
 function getResult(playerMove, computerMove) {
     let result = '';
 
