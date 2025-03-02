@@ -1,5 +1,5 @@
-import {cart} from '../data/cart.js';
-import {products} from '../data/products.js';
+import { cart,addToCart } from '../data/cart.js';
+import { products } from '../data/products.js';
 let productsHTML = '';
 products.forEach((product) => {
     productsHTML += `
@@ -54,33 +54,20 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+function updateCartQuantity() {
+    let cartQuantity = 0;
+    cart.forEach((product) => {
+        cartQuantity += product.quantity;
+    });
+    //update cartQuantity HTML
+    document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`;
+}
 // add event listener to all add to cart buttons
 document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     button.addEventListener('click', () => {
         //get data from button
         const { productId } = button.dataset;
-        // add to cart(check if already added)
-        let matchingItem;
-        cart.forEach((product) => {
-            if (productId === product.productId) {
-                matchingItem = product;
-            };
-        });
-        if (matchingItem) {
-            // matchingItem = product actually store a reference of product so it is worded here
-            matchingItem.quantity++;
-        } else {
-            cart.push({
-                productId,
-                quantity: 1
-            });
-        };
-
-        let cartQuantity = 0;
-        cart.forEach((product) => {
-            cartQuantity += product.quantity;
-        });
-        //update cartQuantity HTML
-        document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`;
+        addToCart(productId);
+        updateCartQuantity();
     })
 })
