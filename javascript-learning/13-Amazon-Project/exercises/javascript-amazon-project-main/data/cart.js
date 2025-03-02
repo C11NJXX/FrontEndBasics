@@ -1,6 +1,10 @@
 export const cart = [{
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 3
+},
+{
+    productId: "d2785924-743d-49b3-8f03-ec258e640503",
+    quantity:2
 }];
 
 export function addToCart(productId) {

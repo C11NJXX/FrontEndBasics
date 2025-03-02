@@ -1,12 +1,13 @@
 import { cart } from "../data/cart.js";
 import { products } from '../data/products.js';
+import {convertMoney} from './utils/money.js'
+let cartSummaryHTML = '';
 
 cart.forEach((cartItem) => {
     // get the attribute that we need
     const { productId, quantity } = cartItem;
     // use quantity to search the rest of the attributes;
     let matchingItem;
-    let cartSummaryHTML = '';
     products.forEach((product) => {
         if (product.id === productId) {
             matchingItem = product;
@@ -30,7 +31,7 @@ cart.forEach((cartItem) => {
                 ${name}
             </div>
             <div class="product-price">
-                $${(priceCents/100).toFixed(2)}
+                $${convertMoney(priceCents)}
             </div>
             <div class="product-quantity">
                 <span>
@@ -52,7 +53,7 @@ cart.forEach((cartItem) => {
 
             <div class="delivery-option">
                 <input type="radio" class="delivery-option-input"
-                name="delivery-option-2">
+                name="delivery-option-${productId}">
                 <div>
                 <div class="delivery-option-date">
                     Tuesday, June 21
@@ -64,7 +65,7 @@ cart.forEach((cartItem) => {
             </div>
             <div class="delivery-option">
                 <input type="radio" checked class="delivery-option-input"
-                name="delivery-option-2">
+                name="delivery-option-${productId}">
                 <div>
                 <div class="delivery-option-date">
                     Wednesday, June 15
@@ -76,7 +77,7 @@ cart.forEach((cartItem) => {
             </div>
             <div class="delivery-option">
                 <input type="radio" class="delivery-option-input"
-                name="delivery-option-2">
+                name="delivery-option-${productId}">
                 <div>
                 <div class="delivery-option-date">
                     Monday, June 13
@@ -90,6 +91,6 @@ cart.forEach((cartItem) => {
         </div>
     </div>
     `
-    //update the page
-    document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 });
+//update the page
+document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
