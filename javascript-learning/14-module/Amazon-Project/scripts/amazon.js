@@ -1,4 +1,4 @@
-import { addToCart, cartQuantity } from '../data/cart.js';
+import { addToCart, cart, cartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 let productsHTML = '';
 let addedToCartId;
@@ -53,8 +53,8 @@ products.forEach((product) => {
         </div>
     `
 });
-
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
 function showAddHint(productId) {

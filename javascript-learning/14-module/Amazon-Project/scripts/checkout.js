@@ -1,12 +1,7 @@
-import { cart, removeFromCart, cartQuantity } from "../data/cart.js";
+import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity } from "../data/cart.js";
 import { products } from '../data/products.js';
 import { convertMoney } from './utils/money.js'
 let cartSummaryHTML = '';
-
-console.log("cQ in checkout" + cartQuantity);
-console.log("ck:" + localStorage.getItem('cartQuantity'));
-if (localStorage.getItem('cartQuantity') === null) localStorage.setItem('cartQuantity', cartQuantity);
-console.log("ck:" + localStorage.getItem('cartQuantity'));
 
 cart.forEach((cartItem) => {
     // get the attribute that we need
@@ -42,7 +37,7 @@ cart.forEach((cartItem) => {
                 <span>
                 Quantity: <span class="quantity-label-${productId}">${quantity}</span>
                 </span>
-                <input class="quantity-input js-quantity-input">
+                <input class="quantity-input js-quantity-input js-quantity-input-${productId}" data-product-id = ${productId}>
                 <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id = ${productId}>Save</span>
                 <span class="update-quantity-link link-primary js-update-quantity-link" data-product-id = ${productId}>
                 Update
@@ -101,9 +96,7 @@ cart.forEach((cartItem) => {
 });
 //update the page
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
-
-
-document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`
+document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
 
 // delete product from cart and update the page
 document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
@@ -112,16 +105,16 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
         const { productId } = button.dataset;
         //removed from the cart
         removeFromCart(productId);
+        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
         //update the page(remove the container with unique product id)
         document.querySelector(`.cart-item-container-${productId}`).remove();
-        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
     });
 });
 
 //update product when clicking update and update the page
 document.querySelectorAll('.js-update-quantity-link').forEach((button) => {
     button.addEventListener('click', () => {
-        // find out which product need to be removed
+        // find out which product need to be updated
         const { productId } = button.dataset;
         //get the container and add a class
         document.querySelector(`.cart-item-container-${productId}`).classList.add('is-editing-quantity');
@@ -131,63 +124,49 @@ document.querySelectorAll('.js-update-quantity-link').forEach((button) => {
 //add eventListener to Save
 document.querySelectorAll('.js-save-quantity-link').forEach((button) => {
     button.addEventListener('click', () => {
-        // find out which product need to be removed
-        const { productId } = button.dataset;
-        //get the container and remove the class
-        document.querySelector(`.cart-item-container-${productId}`).classList.remove('is-editing-quantity');
-        //get and update the quantity of the specific product
-        const newQuantity = Number(document.querySelector('.quantity-input').value);
-        if (newQuantity >= 0 && newQuantity < 1000) {
-            document.querySelector(`.quantity-label-${productId}`).innerHTML = newQuantity;
-            let matchingItem;
-            cart.forEach((cartItem) => {
-                if (cartItem.productId === productId) {
-                    matchingItem = cartItem;
-                }
-            });
-            const newCartQuantity = cartQuantity - matchingItem.quantity + newQuantity;
-            document.querySelector('.js-return-to-home-link').innerHTML = `${newCartQuantity} items`;
-            localStorage.setItem('cartQuantity', newCartQuantity);
-            matchingItem.quantity = newQuantity;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            window.location.reload();
-        } else {
-            alert('new quantity [0,1000)');
-        };
-
-        // matchingItem.quantity = newQuantity;
-        // cartQuantity = cartQuantity - matchingItem.quantity + newQuantity;
-
-        // localStorage.setItem('cartQuantity',cartQuantity);
-        // document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
-        // localStorage.setItem('cart',JSON.stringify(cart));
+        update(button);
     });
-    document.querySelector('.quantity-input').addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            // find out which product need to be removed
-            const { productId } = button.dataset;
-            //get the container and remove the class
-            document.querySelector(`.cart-item-container-${productId}`).classList.remove('is-editing-quantity');
-            //get and update the quantity of the specific product
-            const newQuantity = Number(document.querySelector('.quantity-input').value);
-            if (newQuantity >= 0 && newQuantity < 1000) {
-                document.querySelector(`.quantity-label-${productId}`).innerHTML = newQuantity;
-                let matchingItem;
-                cart.forEach((cartItem) => {
-                    if (cartItem.productId === productId) {
-                        matchingItem = cartItem;
-                    }
-                });
-                const newCartQuantity = cartQuantity - matchingItem.quantity + newQuantity;
-                document.querySelector('.js-return-to-home-link').innerHTML = `${newCartQuantity} items`;
-                localStorage.setItem('cartQuantity', newCartQuantity);
-                matchingItem.quantity = newQuantity;
-                localStorage.setItem('cart', JSON.stringify(cart));
-                window.location.reload();
-            } else {
-                alert('new quantity [0,1000)');
-            };
-        }
-    })
 });
 
+//add eventListener to input
+document.querySelectorAll('.js-quantity-input').forEach((button) => {
+    button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            update(button);
+        }
+    });
+});
+
+function update(button) {
+    // find out which product need to be updated
+    const { productId } = button.dataset;
+    //get the container and remove the class
+    document.querySelector(`.cart-item-container-${productId}`).classList.remove('is-editing-quantity');
+    //get the newQuantity from the input
+    const newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value);
+    console.log(`new quantity = ${newQuantity}`);
+    if (newQuantity >= 0 && newQuantity < 1000) {
+        //update the cart
+        //update the label HTML
+        document.querySelector(`.quantity-label-${productId}`).innerHTML = newQuantity;
+        let matchingItem;
+        cart.forEach((cartItem) => {
+            if (cartItem.productId === productId) {
+                matchingItem = cartItem;
+                return;
+            };
+        });
+        //store the original quantity of the product
+        const originalQuantity = matchingItem.quantity;
+        //update the quantity of the specific product
+        matchingItem.quantity = newQuantity;
+        //saved to localStorage
+        saveCartToLocalStorage();
+        //update the cartQuantity
+        updateCartQuantity(originalQuantity, newQuantity);
+        //update the HTML where display the cart quantity
+        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+    }else {
+        alert('newQuantity must be [0,1000)!');
+    }
+}

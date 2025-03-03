@@ -9,13 +9,13 @@ export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 }
     */
 
-console.log('local before init:' + localStorage.getItem('cartQuantity'));
+// console.log('local before init:' + localStorage.getItem('cartQuantity'));
 
 export let cartQuantity = Number(localStorage.getItem('cartQuantity')) || 0;
-console.log('local after init:' + localStorage.getItem('cartQuantity'));
-console.log('cartQuantity after init:' + cartQuantity);
+// console.log('local after init:' + localStorage.getItem('cartQuantity'));
+// console.log('cartQuantity after init:' + cartQuantity);
 
-function saveToLocalStorage() {
+export function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -38,12 +38,14 @@ export function addToCart(productId) {
             quantity: selectQuantity
         });
     };
+    //save cart to localStorage
+    saveCartToLocalStorage();
     //update cartQuantity
     cartQuantity += selectQuantity;
     localStorage.setItem('cartQuantity', cartQuantity);
     //update the page where display the cartQuantity
-    updateCartQuantity();
-    saveToLocalStorage();
+    //update cartQuantity HTML
+    document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`;
 }
 export function removeFromCart(productId) {
     const newCart = [];
@@ -54,17 +56,15 @@ export function removeFromCart(productId) {
             cartQuantity -= cartItem.quantity;
             //saved to local storage            
             localStorage.setItem('cartQuantity', cartQuantity);
-            console.log("cQ after delete:" + cartQuantity);
-            
-            console.log("local cart:" + localStorage.getItem('cartQuantity'));
-            
+            // console.log("cQ after delete:" + cartQuantity);
+            // console.log("local cart:" + localStorage.getItem('cartQuantity'));
         }
     });
     cart = newCart;
-    saveToLocalStorage();
+    saveCartToLocalStorage();
 }
 
-export function updateCartQuantity() {
-    //update cartQuantity HTML
-    document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantity}`;
+export function updateCartQuantity(originalQuantity,newCartQuantity) {
+    cartQuantity = cartQuantity - originalQuantity + newCartQuantity;
+    localStorage.setItem('cartQuantity',cartQuantity);
 }
