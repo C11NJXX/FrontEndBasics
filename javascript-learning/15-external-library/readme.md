@@ -11,3 +11,8 @@ Named Export {...,...};
 还一个就是之前因为localStorage没有处理好，数据出错了每次都手动的去清缓存，其实可以在console里
 localStorage.clear();
 ```
+
+```
+Before 14:57:03
+这里引入了一个A function can call/re -run itself = recursion
+```
