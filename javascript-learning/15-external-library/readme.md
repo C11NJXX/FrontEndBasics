@@ -16,3 +16,22 @@ localStorage.clear();
 Before 14:57:03
 这里引入了一个A function can call/re -run itself = recursion
 ```
+
+```
+IMPORTANT!!!
+
+Before 15:00:19
+这里介绍了MVC(Model - View - Controller)
+在这之前，在每次更新数据后重新生成html
+过程是:
+1.Update the data
+2.Regenerate all the HTML => MVC (Model => View => Controller => Model => ......)
+
+MVC split our code into 3 parts
+1.Model: saves and manages the data (store the data and offer some function to deal with the data)
+2.View: takes the data and display it on the page (there are some listeners on the page, we can interact with it and it will run the code, the code is controller)
+3.Controller: run some code when we interact with the page (it may update the data which Model saves and manages) => Next Loop
+
+MVC makes sure the page always matches the data
+MVC is a design patterns(设计模式)
+```
