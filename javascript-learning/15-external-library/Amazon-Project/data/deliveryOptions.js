@@ -1,3 +1,14 @@
+export function getDeliveryOption(deliveryOptionId) {
+    //get delivery option
+    let matchingDeliveryOption;
+    deliveryOptions.forEach((option) => {
+        if (option.id === deliveryOptionId) {
+            matchingDeliveryOption = option;
+        };
+    });
+    return matchingDeliveryOption;
+}
+
 export const deliveryOptions = [
     {
         id: '1',
@@ -15,5 +26,3 @@ export const deliveryOptions = [
         priceCents: 999
     }
 ];
-
-export default deliveryOptions;

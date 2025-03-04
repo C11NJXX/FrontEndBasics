@@ -1,8 +1,8 @@
 import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity, updateDeliveryOptions } from "../../data/cart.js";
-import { products } from '../../data/products.js';
+import { getProduct } from '../../data/products.js';
 import convertMoney from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import deliveryOptions from '../../data/deliveryOptions.js'
+import { deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js'
 
 const today = dayjs();
 
@@ -12,22 +12,12 @@ export function renderOrderSummary() {
         // get the attribute that we need
         const { productId, quantity, deliveryOptionId } = cartItem;
         // use quantity to search the rest of the attributes;
-        let matchingItem;
-        products.forEach((product) => {
-            if (product.id === productId) {
-                matchingItem = product;
-            }
-        });
+        const matchingItem = getProduct(productId);
         //get the rest of the attributes
         const { image, name, priceCents } = matchingItem;
         const deliveryOptionHTML = generateDeliveryOptionHTML(productId, deliveryOptionId);
         //get delivery option
-        let matchingDeliveryOption;
-        deliveryOptions.forEach((option) => {
-            if (option.id === deliveryOptionId) {
-                matchingDeliveryOption = option;
-            };
-        });
+        const matchingDeliveryOption = getDeliveryOption(deliveryOptionId);
         const { deliveryDays } = matchingDeliveryOption;
         const deliveryDate = today.add(deliveryDays, 'days');
         const dateString = deliveryDate.format('dddd, MMMM D');
