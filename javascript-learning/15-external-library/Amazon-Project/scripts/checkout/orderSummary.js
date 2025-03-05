@@ -1,8 +1,8 @@
 import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity, updateDeliveryOptions } from "../../data/cart.js";
 import { getProduct } from '../../data/products.js';
-import convertMoney from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js'
+import convertMoney from "../utils/money.js";
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from "./paymentSummary.js";
 const today = dayjs();
 
@@ -74,11 +74,6 @@ export function renderOrderSummary() {
             const { productId } = button.dataset;
             //removed from the cart
             removeFromCart(productId);
-            /*
-            document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
-            //update the page(remove the container with unique product id)
-            document.querySelector(`.cart-item-container-${productId}`).remove();
-            */
             renderOrderSummary();
             renderPaymentSummary();
         });
@@ -128,10 +123,7 @@ function generateDeliveryOptionHTML(productId, deliveryOptionId) {
     //Loop the delivery options and generate the html
     deliveryOptions.forEach((deliveryOption) => {
         // generate the date
-        const { id, deliveryDays, priceCents } = deliveryOption;
-        const deliveryDate = today.add(deliveryDays, 'days');
-        const dateString = deliveryDate.format('dddd, MMMM D');
-        const deliveryCost = convertMoney(priceCents);
+        const {id,dateString,deliveryCost} = calculateDeliveryDate(today,deliveryOption);
 
         deliveryOptionHTML += `
             <div class="delivery-option">

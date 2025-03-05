@@ -35,3 +35,5 @@ MVC split our code into 3 parts
 MVC makes sure the page always matches the data
 MVC is a design patterns(设计模式)
 ```
+
+![alt text](image.png)
