@@ -18,9 +18,7 @@ export function renderOrderSummary() {
         const deliveryOptionHTML = generateDeliveryOptionHTML(productId, deliveryOptionId);
         //get delivery option
         const matchingDeliveryOption = getDeliveryOption(deliveryOptionId);
-        const { deliveryDays } = matchingDeliveryOption;
-        const deliveryDate = today.add(deliveryDays, 'days');
-        const dateString = deliveryDate.format('dddd, MMMM D');
+        const {dateString} = calculateDeliveryDate(today,matchingDeliveryOption);
         //generate the HTML;
         cartSummaryHTML += `
     <div class="cart-item-container cart-item-container-${productId}">

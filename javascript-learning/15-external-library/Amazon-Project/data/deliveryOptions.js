@@ -1,4 +1,5 @@
 import convertMoney from "../scripts/utils/money.js"
+import isWeekend from '../scripts/utils/weekend.js'
 export function getDeliveryOption(deliveryOptionId) {
     //get delivery option
     let matchingDeliveryOption;
@@ -31,8 +32,16 @@ export const deliveryOptions = [
 export function calculateDeliveryDate(today,deliveryOption) {
     // generate the date
     const { id, deliveryDays, priceCents } = deliveryOption;
-    const deliveryDate = today.add(deliveryDays, 'days');
-    const dateString = deliveryDate.format('dddd, MMMM D');
+    //skip weekends
+    let remainingDays = deliveryDays;
+    let deliveryDate = today;
+    while(remainingDays > 0) {
+        deliveryDate = deliveryDate.add(1,'day');
+        if(!isWeekend(deliveryDate.format('dddd'))) {
+            remainingDays--;
+        }
+    };
+    const dateString = deliveryDate.format('dddd, MMMM D');    
     const deliveryCost = convertMoney(priceCents);
     return {id,dateString,deliveryCost};
 }
