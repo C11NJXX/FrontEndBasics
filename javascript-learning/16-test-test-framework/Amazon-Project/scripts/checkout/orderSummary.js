@@ -21,7 +21,7 @@ export function renderOrderSummary() {
         const {dateString} = calculateDeliveryDate(today,matchingDeliveryOption);
         //generate the HTML;
         cartSummaryHTML += `
-    <div class="cart-item-container cart-item-container-${productId}">
+    <div class="cart-item-container cart-item-container-${productId} js-cart-item-container">
         <div class="delivery-date js-delivery-date-${productId}">
             Delivery date: ${dateString}
         </div>
@@ -37,7 +37,7 @@ export function renderOrderSummary() {
             <div class="product-price">
                 $${convertMoney(priceCents)}
             </div>
-            <div class="product-quantity">
+            <div class="product-quantity js-product-quantity-${productId}">
                 <span>
                 Quantity: <span class="quantity-label-${productId}">${quantity}</span>
                 </span>
@@ -46,7 +46,7 @@ export function renderOrderSummary() {
                 <span class="update-quantity-link link-primary js-update-quantity-link" data-product-id = ${productId}>
                 Update
                 </span>
-                <span class="delete-quantity-link link-primary js-delete-quantity-link" data-product-id = ${productId}>
+                <span class="delete-quantity-link link-primary js-delete-quantity-link js-delete-link-${productId}" data-product-id = ${productId}>
                 Delete
                 </span>
             </div>
@@ -64,6 +64,7 @@ export function renderOrderSummary() {
     });
     //update the page
     document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+    if(document.querySelector('.js-return-to-home-link'))
     document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
     // delete product from cart and update the page
     document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
