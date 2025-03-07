@@ -1,11 +1,35 @@
+import convertMoney from "../scripts/utils/money.js";
 export function getProduct(productId) {
   let matchingItem;
   products.forEach((product) => {
-      if (product.id === productId) {
-          matchingItem = product;
-      }
+    if (product.id === productId) {
+      matchingItem = product;
+    }
   });
   return matchingItem;
+}
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  }
+
+  getStarsURL() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`
+  }
+  getPrice() {
+    return `$${convertMoney(this.priceCents)}`
+  }
 }
 
 export const products = [
@@ -665,10 +689,10 @@ export const products = [
       "hoodies",
       "apparel",
       "mens"
-    ] 
+    ]
   },
   {
-    id:'id1',
+    id: 'id1',
     image: "images/products/backpack.jpg",
     name: "Men's Full-Zip Hooded Fleece Sweatshirt",
     rating: {
@@ -678,7 +702,7 @@ export const products = [
     priceCents: 9999
   },
   {
-    id:'id2',
+    id: 'id2',
     image: "images/products/umbrella.jpg",
     name: "Men's Full-Zip Hooded Fleece Sweatshirt",
     rating: {
@@ -687,4 +711,6 @@ export const products = [
     },
     priceCents: 100
   }
-];
+].map((productDetails) => {
+  return new Product(productDetails);
+});

@@ -2,7 +2,7 @@ import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQ
 import { getProduct } from '../../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import convertMoney from "../utils/money.js";
-import { deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js'
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from "./paymentSummary.js";
 const today = dayjs();
 
@@ -14,11 +14,11 @@ export function renderOrderSummary() {
         // use quantity to search the rest of the attributes;
         const matchingItem = getProduct(productId);
         //get the rest of the attributes
-        const { image, name, priceCents } = matchingItem;
+        const { image, name } = matchingItem;
         const deliveryOptionHTML = generateDeliveryOptionHTML(productId, deliveryOptionId);
         //get delivery option
         const matchingDeliveryOption = getDeliveryOption(deliveryOptionId);
-        const {dateString} = calculateDeliveryDate(today,matchingDeliveryOption);
+        const { dateString } = calculateDeliveryDate(today, matchingDeliveryOption);
         //generate the HTML;
         cartSummaryHTML += `
     <div class="cart-item-container cart-item-container-${productId} js-cart-item-container">
@@ -35,7 +35,7 @@ export function renderOrderSummary() {
                 ${name}
             </div>
             <div class="product-price js-product-price-${productId}">
-                $${convertMoney(priceCents)}
+                ${matchingItem.getPrice()}
             </div>
             <div class="product-quantity js-product-quantity-${productId}">
                 <span>
@@ -64,8 +64,8 @@ export function renderOrderSummary() {
     });
     //update the page
     document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
-    if(document.querySelector('.js-return-to-home-link'))
-    document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+    if (document.querySelector('.js-return-to-home-link'))
+        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
     // delete product from cart and update the page
     document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
         button.addEventListener('click', () => {
@@ -104,7 +104,7 @@ export function renderOrderSummary() {
                 renderPaymentSummary();
             }
         });
-        
+
     });
 
     //add eventListener to delivery option ratio
@@ -122,7 +122,7 @@ function generateDeliveryOptionHTML(productId, deliveryOptionId) {
     //Loop the delivery options and generate the html
     deliveryOptions.forEach((deliveryOption) => {
         // generate the date
-        const {id,dateString,deliveryCost} = calculateDeliveryDate(today,deliveryOption);
+        const { id, dateString, deliveryCost } = calculateDeliveryDate(today, deliveryOption);
 
         deliveryOptionHTML += `
             <div class="delivery-option js-delivery-option-${productId}">
