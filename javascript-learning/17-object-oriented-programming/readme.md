@@ -14,3 +14,12 @@ and easy to create multiple object
 很生动形象吧哈哈哈
 在使用class的时候,use the PascalCase for things that generate objects
 ```
+
+```
+正式引入Class，原来上面的还不是class，只是使用函数来表现出Class的作用
+但是很明显Class有更多的features like constructor
+Class helps us generate objects
+it is the better way!
+Constructor helps us run some setup code
+Constructor has to be named constructor and no return anything
+```
