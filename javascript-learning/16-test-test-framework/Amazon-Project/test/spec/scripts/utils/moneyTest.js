@@ -9,4 +9,7 @@ describe('Test suite: convertMoney', () => {
     it('float and round test',() => {
         expect(convertMoney(409.6)).toEqual(4.10);
     });
+    it('check code rounds down',() => {
+        expect(convertMoney(2000.4)).toEqual(20.00);
+    });
 });
