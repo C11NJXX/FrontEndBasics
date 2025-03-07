@@ -75,4 +75,13 @@ describe('test suite: renderOrderSummary', () => {
             cart[0].productId
         ).toEqual(productId2);
     });
+
+    it('updates the delivery options',() => {
+        const option = document.querySelector(`.js-delivery-option-input-${productId1}-3`);
+        option.click();
+        expect(option.checked).toEqual(true);
+        expect(cart.length).toEqual(2);
+        expect(cart[0].productId).toEqual(productId1);
+        expect(cart[0].deliveryOptionId).toEqual('3');
+    });
 });

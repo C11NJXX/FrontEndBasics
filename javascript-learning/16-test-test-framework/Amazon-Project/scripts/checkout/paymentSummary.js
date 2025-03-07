@@ -35,7 +35,7 @@ export function renderPaymentSummary() {
 
             <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
-            <div class="payment-summary-money">$${convertMoney(shippingPriceCents)}</div>
+            <div class="payment-summary-money js-payment-summary-money-shipping">$${convertMoney(shippingPriceCents)}</div>
             </div>
 
             <div class="payment-summary-row subtotal-row">
@@ -50,7 +50,7 @@ export function renderPaymentSummary() {
 
             <div class="payment-summary-row total-row">
             <div>Order total:</div>
-            <div class="payment-summary-money">$${convertMoney(totalCents)}</div>
+            <div class="payment-summary-money js-payment-summary-money-total">$${convertMoney(totalCents)}</div>
             </div>
 
             <button class="place-order-button button-primary">

@@ -125,8 +125,8 @@ function generateDeliveryOptionHTML(productId, deliveryOptionId) {
         const {id,dateString,deliveryCost} = calculateDeliveryDate(today,deliveryOption);
 
         deliveryOptionHTML += `
-            <div class="delivery-option">
-                <input type="radio" class="delivery-option-input js-delivery-option-input"
+            <div class="delivery-option js-delivery-option-${productId}">
+                <input type="radio" class="delivery-option-input js-delivery-option-input js-delivery-option-input-${productId}-${deliveryOption.id}"
                 name="delivery-option-${productId}" ${id === deliveryOptionId ? 'checked' : ''} 
                 data-product-id = ${productId} data-delivery-option-id = ${id}>
                 <div>
