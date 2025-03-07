@@ -9,21 +9,22 @@ import { isValidOptionId } from './deliveryOptions.js'
 
 class Cart {
     cartItems;
-    cartKey;
+    #cartKey;
+    #cartQuantityKey;
     cartQuantity;
     constructor(cartKey, cartQuantityKey) {
-        this.cartKey = cartKey;
-        this.cartQuantityKey = cartQuantityKey;
+        this.#cartKey = cartKey;
+        this.#cartQuantityKey = cartQuantityKey;
         this.cartQuantity = Number(localStorage.getItem(cartQuantityKey)) || 0;
-        this.loadFromStorage();
+        this.#loadFromStorage();
     }
 
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.cartKey)) || [];
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#cartKey)) || [];
     }
 
     saveCartToLocalStorage() {
-        localStorage.setItem(this.cartKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#cartKey, JSON.stringify(this.cartItems));
     }
 
     addToCart(productId) {
@@ -57,7 +58,7 @@ class Cart {
         this.saveCartToLocalStorage();
         //update cartQuantity
         this.cartQuantity += selectQuantity;
-        localStorage.setItem(this.cartQuantityKey, this.cartQuantity);
+        localStorage.setItem(this.#cartQuantityKey, this.cartQuantity);
         //update the page where display the cartQuantity
         //update cartQuantity HTML
         if (document.querySelector('.js-cart-quantity'))

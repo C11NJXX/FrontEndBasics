@@ -23,3 +23,9 @@ it is the better way!
 Constructor helps us run some setup code
 Constructor has to be named constructor and no return anything
 ```
+
+```
+听说过private但是没听说过用一个#(number sign / hash)去修饰
+Private = it can only be accessed inside the class
+在报错信息里有一个单词field 这个和property是一样的
+```
