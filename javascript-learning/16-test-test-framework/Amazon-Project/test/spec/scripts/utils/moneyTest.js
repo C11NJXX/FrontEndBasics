@@ -12,4 +12,7 @@ describe('Test suite: convertMoney', () => {
     it('check code rounds down',() => {
         expect(convertMoney(2000.4)).toEqual(20.00);
     });
+    it('negative number',() => {
+        expect(convertMoney(-1000)).toEqual(-10.00);
+    })
 });
