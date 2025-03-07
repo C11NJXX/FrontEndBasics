@@ -45,3 +45,7 @@ export function calculateDeliveryDate(today,deliveryOption) {
     const deliveryCost = convertMoney(priceCents);
     return {id,dateString,deliveryCost};
 }
+
+export function isValidOptionId(deliveryOptionId) {
+    return deliveryOptionId === '1' || deliveryOptionId === '2' || deliveryOptionId === '3' || false;
+}

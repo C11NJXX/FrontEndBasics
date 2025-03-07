@@ -142,5 +142,14 @@ describe('test suite: updateDeliveryOption', () => {
         expect(cart[0].productId).toEqual(productId1);
         expect(cart[0].quantity).toEqual(1);
         expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+    });
+
+    it('edge test: update the delivery option but the deliveryOptionId is not valid', () => {
+        updateDeliveryOptions(productId1, '666');
+        expect(cart[0].deliveryOptionId).toEqual('1');
+        expect(cart.length).toEqual(1);
+        expect(cart[0].productId).toEqual(productId1);
+        expect(cart[0].quantity).toEqual(1);
+        expect(localStorage.setItem).toHaveBeenCalledTimes(0);
     })
 });
