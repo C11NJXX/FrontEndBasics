@@ -1,12 +1,12 @@
 class Car {
     #brand;
     #model;
-    speed;
+    _speed;
     isTrunkOpen;
     constructor(brand, model) {
         this.#brand = brand;
         this.#model = model;
-        this.speed = 0;
+        this._speed = 0;
         this.isTrunkOpen = false;
     }
     getBrand() {
@@ -16,27 +16,27 @@ class Car {
         return this.#model;
     }
     displayInfo() {
-        console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h, Trunk is ${this.isTrunkOpen ? "opened" : "closed"}`);
+        console.log(`${this.#brand} ${this.#model}, Speed: ${this._speed} km/h, Trunk is ${this.isTrunkOpen ? "opened" : "closed"}`);
     }
 
     go() {
         if (!this.isTrunkOpen) {
-            if (this.speed >= 0 && this.speed <= 195)
-                this.speed += 5;
+            if (this._speed >= 0 && this._speed <= 195)
+                this._speed += 5;
         } else {
             console.log('Refuse to go, the trunk is opened');
         }
     }
 
     break() {
-        if (this.speed >= 5 && this.speed <= 200)
-            this.speed -= 5
+        if (this._speed >= 5 && this._speed <= 200)
+            this._speed -= 5
     }
     openTrunk() {
-        if (this.speed === 0) {
+        if (this._speed === 0) {
             this.isTrunkOpen = true;
         } else {
-            console.log(`Refused to open, The car is running at speed: ${this.speed}`)
+            console.log(`Refused to open, The car is running at speed: ${this._speed}`)
         }
     }
     closeTrunk() {
@@ -92,8 +92,8 @@ class RaceCar extends Car {
 
     //override go()
     go() {
-        if (this.speed >= 0 && this.speed <= 295)
-            this.speed += this.acceleration;
+        if (this._speed >= 0 && this._speed <= 295)
+            this._speed += this.acceleration;
     }
     //override openTrunk() and closeTrunk()
     openTrunk() {
@@ -104,7 +104,7 @@ class RaceCar extends Car {
     }
     //override displayInfo
     displayInfo() {
-        console.log(`${this.getBrand()} ${this.getModel()}, Speed: ${this.speed} km/h, acceleration speed: ${this.acceleration} km/h`);
+        console.log(`${this.getBrand()} ${this.getModel()}, Speed: ${this._speed} km/h, acceleration speed: ${this.acceleration} km/h`);
     }
 }
 
