@@ -36,3 +36,32 @@ If we want to new different type, we can use discriminator property
 Polymorphism: use a method without knowing the class
 Override the method: override/replace the parent's method
 ```
+
+```
+Built in classes = classes that are provided by the language
+在product.js里有一写关于this的练习可以查看
+```
+```
+1.inside a function, we can change "this" to whatever we want
+```
+![alt text](img/image-2.png)
+![alt text](img/image-3.png)
+```
+2.Arrow functions do not change the value of "this"
+```
+![alt text](img/image-4.png)
+```
+"this" will have the same value as outside the arrow function
+```
+![alt text](img/image-5.png)
+```
+3."this" keeps the value that it had outside the arrow function
+```
+![alt text](img/image-6.png)
+```
+that's why developer design arrow function to behave like this
+```
+```
+Summary of "this"
+```
+![alt text](img/image-7.png)

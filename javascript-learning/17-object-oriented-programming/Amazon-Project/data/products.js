@@ -49,6 +49,58 @@ class Clothing extends Product {
   }
 }
 
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleDateString());
+*/
+
+/*
+console.log(this); // undefined
+*/
+
+/*
+//products.js:64 Uncaught TypeError: Cannot read properties of undefined (reading 'a')
+const object = {
+  a:3,
+  b:this.a
+};
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+logThis(); // undefined
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+logThis.call("Change this to whatever I want"); //Change this to whatever I want
+*/
+
+/*
+const object = {
+  method: () => {
+    console.log(this);
+  }
+}
+object.method(); // undefined
+*/
+
+/*
+const object = {
+  method: function() {
+    console.log(this);
+  }
+}
+object.method(); //{method: ƒ}
+*/
+
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
