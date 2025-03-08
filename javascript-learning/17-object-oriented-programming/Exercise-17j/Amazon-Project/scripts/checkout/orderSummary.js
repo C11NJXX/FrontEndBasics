@@ -1,4 +1,5 @@
-import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity, updateDeliveryOptions } from "../../data/cart.js";
+// import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity, updateDeliveryOptions } from "../../data/cart.js";
+import {cart} from '../../data/cart-class.js'
 import { getProduct } from '../../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import convertMoney from "../utils/money.js";
@@ -8,7 +9,7 @@ const today = dayjs();
 
 export function renderOrderSummary() {
     let cartSummaryHTML = '';
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
         // get the attribute that we need
         const { productId, quantity, deliveryOptionId } = cartItem;
         // use quantity to search the rest of the attributes;
@@ -65,14 +66,14 @@ export function renderOrderSummary() {
     //update the page
     document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
     if (document.querySelector('.js-return-to-home-link'))
-        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+        document.querySelector('.js-return-to-home-link').innerHTML = `${cart.cartQuantity} items`;
     // delete product from cart and update the page
     document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
         button.addEventListener('click', () => {
             // find out which product need to be removed
             const { productId } = button.dataset;
             //removed from the cart
-            removeFromCart(productId);
+            cart.removeFromCart(productId);
             renderOrderSummary();
             renderPaymentSummary();
         });
@@ -111,7 +112,7 @@ export function renderOrderSummary() {
     document.querySelectorAll('.js-delivery-option-input').forEach((option) => {
         const { productId, deliveryOptionId } = option.dataset;
         option.addEventListener('click', () => {
-            updateDeliveryOptions(productId, deliveryOptionId);
+            cart.updateDeliveryOptions(productId, deliveryOptionId);
             renderOrderSummary();
             renderPaymentSummary();
         });
@@ -158,7 +159,7 @@ function update(button) {
         document.querySelector(`.quantity-label-${productId}`).innerHTML = newQuantity;
         */
         let matchingItem;
-        cart.forEach((cartItem) => {
+        cart.cartItems.forEach((cartItem) => {
             if (cartItem.productId === productId) {
                 matchingItem = cartItem;
                 return;
@@ -169,9 +170,9 @@ function update(button) {
         //update the quantity of the specific product
         matchingItem.quantity = newQuantity;
         //saved to localStorage
-        saveCartToLocalStorage();
+        cart.saveCartToLocalStorage();
         //update the cartQuantity
-        updateCartQuantity(originalQuantity, newQuantity);
+        cart.updateCartQuantity(originalQuantity, newQuantity);
         /*
             //update the HTML where display the cart quantity
             document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;

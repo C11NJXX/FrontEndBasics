@@ -18,6 +18,9 @@ class Cart {
         this.cartQuantity = Number(localStorage.getItem(cartQuantityKey)) || 0;
         this.#loadFromStorage();
     }
+    getCartQuantityKey() {
+        return this.#cartQuantityKey;
+    }
 
     #loadFromStorage() {
         this.cartItems = JSON.parse(localStorage.getItem(this.#cartKey)) || [];
@@ -73,7 +76,7 @@ class Cart {
             } else if (cartItem.productId === productId) {
                 this.cartQuantity -= cartItem.quantity;
                 //saved to local storage            
-                localStorage.setItem(cartQuantityKey, this.cartQuantity);
+                localStorage.setItem(this.getCartQuantityKey(), this.cartQuantity);
             }
         });
         this.cartItems = newCart;
@@ -82,7 +85,7 @@ class Cart {
 
     updateCartQuantity(originalQuantity, newCartQuantity) {
         this.cartQuantity = this.cartQuantity - originalQuantity + newCartQuantity;
-        localStorage.setItem(cartQuantityKey, this.cartQuantity);
+        localStorage.setItem(this.#cartQuantityKey, this.cartQuantity);
     }
 
     updateDeliveryOptions(productId, deliveryOptionId) {
@@ -99,11 +102,11 @@ class Cart {
     }
 
 }
-const cart = new Cart('cart-oop', 'cartQuantity-oop');
-const businessCart = new Cart('cart-business', 'cartQuantity-business');
+export const cart = new Cart('cart-oop', 'cartQuantity-oop');
+// const businessCart = new Cart('cart-business', 'cartQuantity-business');
 
 
-cart.addToCart('');
-console.log(cart);
+// cart.addToCart('');
+// console.log(cart);
 
-console.log(businessCart);
+// console.log(businessCart);

@@ -1,4 +1,5 @@
-import { addToCart, cartQuantity } from '../data/cart.js';
+// import { addToCart, cartQuantity } from '../data/cart.js';
+import {cart} from '../data/cart-class.js'
 import { products } from '../data/products.js';
 let productsHTML = '';
 let addedToCartId;
@@ -55,7 +56,7 @@ products.forEach((product) => {
 });
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+document.querySelector('.js-cart-quantity').innerHTML = cart.cartQuantity;
 
 function showAddHint(productId) {
     //show added when click
@@ -79,7 +80,7 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     button.addEventListener('click', () => {
         //get data from button
         const { productId } = button.dataset;
-        addToCart(productId);
+        cart.addToCart(productId);
         showAddHint(productId);
     });
 })
