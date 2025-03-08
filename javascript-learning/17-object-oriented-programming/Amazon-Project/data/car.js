@@ -1,16 +1,22 @@
 class Car {
-    brand;
-    model;
+    #brand;
+    #model;
     speed;
     isTrunkOpen;
     constructor(brand, model) {
-        this.brand = brand;
-        this.model = model;
+        this.#brand = brand;
+        this.#model = model;
         this.speed = 0;
         this.isTrunkOpen = false;
     }
+    getBrand() {
+        return this.#brand;
+    }
+    getModel() {
+        return this.#model;
+    }
     displayInfo() {
-        console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h, Trunk is ${this.isTrunkOpen ? "opened" : "closed"}`);
+        console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h, Trunk is ${this.isTrunkOpen ? "opened" : "closed"}`);
     }
 
     go() {
@@ -98,7 +104,7 @@ class RaceCar extends Car {
     }
     //override displayInfo
     displayInfo() {
-        console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h, acceleration speed: ${this.acceleration} km/h`);
+        console.log(`${this.getBrand()} ${this.getModel()}, Speed: ${this.speed} km/h, acceleration speed: ${this.acceleration} km/h`);
     }
 }
 
