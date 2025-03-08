@@ -29,3 +29,10 @@ Constructor has to be named constructor and no return anything
 Private = it can only be accessed inside the class
 在报错信息里有一个单词field 这个和property是一样的
 ```
+
+```
+Inheritance: Lets us reuse code between classes
+If we want to new different type, we can use discriminator property
+Polymorphism: use a method without knowing the class
+Override the method: override/replace the parent's method
+```
