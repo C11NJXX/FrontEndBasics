@@ -8,13 +8,15 @@ async function loadPage() {
     try {
         // throw 'errrrrrror';
         await loadProductsFetch();
+        /*
         await new Promise((resolve,reject) => {
             // throw 'errrrrrror';
             cart.loadCart(() => {
                 //reject('errrrrror');
                 resolve();
             });
-    });
+    });*/
+        await cart.loadCartFetch();
     } catch(error) {
         console.log(error);
     }
