@@ -104,3 +104,12 @@ Error Handle:
 
 intro reject(second parameter of promise)
 ```
+
+```
+POST: create something 
+post lets us send data to the backend.
+```
+![alt text](img/image-19.png)
+```
+headers gives the backend more information about our request. 
+```
