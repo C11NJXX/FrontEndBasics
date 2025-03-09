@@ -5,12 +5,19 @@ import { cart } from "../data/cart-class.js"
 
 //async await version
 async function loadPage() {
-    await loadProductsFetch();
-    await new Promise((resolve) => {
-        cart.loadCart(() => {
-            resolve();
-        });
+    try {
+        // throw 'errrrrrror';
+        await loadProductsFetch();
+        await new Promise((resolve,reject) => {
+            // throw 'errrrrrror';
+            cart.loadCart(() => {
+                //reject('errrrrror');
+                resolve();
+            });
     });
+    } catch(error) {
+        console.log(error);
+    }
     renderOrderSummary();
     renderPaymentSummary();
 };

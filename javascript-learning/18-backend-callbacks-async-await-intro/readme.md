@@ -94,3 +94,13 @@ async await can only be used with promises.
 It's easier to save value
 ```
 ![alt text](img/image-18.png)
+
+
+```
+Error Handle:
+1. add event listener 'error'
+2. add catch (fetch)
+3. add try catch
+
+intro reject(second parameter of promise)
+```
