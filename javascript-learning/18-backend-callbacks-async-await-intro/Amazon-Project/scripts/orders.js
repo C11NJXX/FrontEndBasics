@@ -3,7 +3,7 @@ import { products, loadProductsFetch } from "../data/products.js";
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import convertMoney from "./utils/money.js";
-
+import { cart } from '../data/cart-class.js';
 loadOrdersPage();
 
 async function loadOrdersPage() {
@@ -17,7 +17,7 @@ async function loadOrdersPage() {
         //format the date
         //TODO:Use function to handle the date
         const orderDateBeforeFormat = new dayjs(orderTime);
-        const orderDate = orderDateBeforeFormat.format('MMMM DD');
+        const orderDate = orderDateBeforeFormat.format('MMMM D');
 
         const orderHeaderHTML = `
             <div class="order-header">
@@ -39,7 +39,7 @@ async function loadOrdersPage() {
             </div>
         `;
         let ordersDetailsHTML = '';
-        
+
         orderProducts.forEach((orderProduct) => {
             const { productId, quantity, estimatedDeliveryTime, variation } = orderProduct;
             //TODO:Use function to handle the date
@@ -70,14 +70,14 @@ async function loadOrdersPage() {
                 <div class="product-quantity">
                     Quantity: ${quantity}
                 </div>
-                <button class="buy-again-button button-primary">
+                <button class="buy-again-button button-primary js-buy-again-button" data-product-id=${productId}>
                     <img class="buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
                 </button>
                 </div>
 
                 <div class="product-actions">
-                <a href="tracking.html?orderId=???&productId=???">
+                <a href="tracking.html?orderId=${id}&productId=${productId}">
                     <button class="track-package-button button-secondary">
                     Track package
                     </button>
@@ -95,6 +95,14 @@ async function loadOrdersPage() {
         `
         ordersHTML += orderHTML;
     });
+    document.querySelector('.js-cart-quantity').innerHTML = `${cart.cartQuantity}`
     document.querySelector('.js-orders-grid').innerHTML = ordersHTML;
+    //after generating HTML, add eventListener
+    document.querySelectorAll('.js-buy-again-button').forEach((button) => {
+        const { productId } = button.dataset;
+        button.addEventListener('click', () => {
+            cart.addToCart(productId);
+        })
+    });
 }
 
