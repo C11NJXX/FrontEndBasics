@@ -101,12 +101,17 @@ class Cart {
         this.saveCartToLocalStorage();
     }
 
+    loadCart(fun) {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+            console.log(xhr.response);
+            fun();
+        });
+
+        xhr.open('GET', 'https://supersimplebackend.dev/cart');
+        xhr.send();
+    }
 }
 export const cart = new Cart('cart-oop', 'cartQuantity-oop');
-// const businessCart = new Cart('cart-business', 'cartQuantity-business');
 
-
-// cart.addToCart('');
-// console.log(cart);
-
-// console.log(businessCart);
