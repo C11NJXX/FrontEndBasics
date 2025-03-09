@@ -113,3 +113,7 @@ post lets us send data to the backend.
 ```
 headers gives the backend more information about our request. 
 ```
+```
+URL parameters
+```
+![alt text](img/image-20.png)
