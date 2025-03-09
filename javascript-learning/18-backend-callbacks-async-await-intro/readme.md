@@ -1,3 +1,4 @@
+![alt text](img/summary.png)
 ```
 终于进入了一个我之前没有详细学习过的知识部分
 XMLHttpRequest: This is a built-in class(Provided by JavaScript)
@@ -116,4 +117,4 @@ headers gives the backend more information about our request.
 ```
 URL parameters
 ```
-![alt text](img/image-20.png)
+![alt text](img/cimage-20.png)
