@@ -49,3 +49,7 @@ Promise.all() :
 - lets us run multiple promises at the same time
 - and wait for all of them to finish
 ```
+
+```
+fetch() : better way to make HTTP requests
+```
