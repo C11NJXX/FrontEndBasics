@@ -2,7 +2,6 @@
 import {cart} from '../../data/cart-class.js'
 import { getProduct } from '../../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import convertMoney from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from "./paymentSummary.js";
 const today = dayjs();

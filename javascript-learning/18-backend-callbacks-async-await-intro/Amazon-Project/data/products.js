@@ -64,58 +64,80 @@ export class Appliance extends Product {
   }
 }
 
-/*
-const date = new Date();
-console.log(date);
-console.log(date.toLocaleDateString());
-*/
+{
+  /*
+  const date = new Date();
+  console.log(date);
+  console.log(date.toLocaleDateString());
+  */
 
-/*
-console.log(this); // undefined
-*/
+  /*
+  console.log(this); // undefined
+  */
 
-/*
-//products.js:64 Uncaught TypeError: Cannot read properties of undefined (reading 'a')
-const object = {
-  a:3,
-  b:this.a
-};
-*/
+  /*
+  //products.js:64 Uncaught TypeError: Cannot read properties of undefined (reading 'a')
+  const object = {
+    a:3,
+    b:this.a
+  };
+  */
 
-/*
-function logThis() {
-  console.log(this);
-}
-logThis(); // undefined
-*/
-
-/*
-function logThis() {
-  console.log(this);
-}
-logThis.call("Change this to whatever I want"); //Change this to whatever I want
-*/
-
-/*
-const object = {
-  method: () => {
+  /*
+  function logThis() {
     console.log(this);
   }
-}
-object.method(); // undefined
-*/
+  logThis(); // undefined
+  */
 
-/*
-const object = {
-  method: function() {
+  /*
+  function logThis() {
     console.log(this);
   }
+  logThis.call("Change this to whatever I want"); //Change this to whatever I want
+  */
+
+  /*
+  const object = {
+    method: () => {
+      console.log(this);
+    }
+  }
+  object.method(); // undefined
+  */
+
+  /*
+  const object = {
+    method: function() {
+      console.log(this);
+    }
+  }
+  object.method(); //{method: ƒ}
+  */
 }
-object.method(); //{method: ƒ}
-*/
 
+export let products = [];
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } else if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails);
+      }
+      return new Product(productDetails);
+    });
+    console.log("Load Products");
+    //callback
+    fun();
+  });
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+loadProducts(()=>{});
 
-
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -810,8 +832,9 @@ export const products = [
 ].map((productDetails) => {
   if (productDetails.type === 'clothing') {
     return new Clothing(productDetails);
-  }else if(productDetails.type === 'appliance') {
+  } else if (productDetails.type === 'appliance') {
     return new Appliance(productDetails);
   }
   return new Product(productDetails);
 });
+*/
