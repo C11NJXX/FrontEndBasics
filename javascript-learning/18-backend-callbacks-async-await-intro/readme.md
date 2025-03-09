@@ -53,3 +53,44 @@ Promise.all() :
 ```
 fetch() : better way to make HTTP requests
 ```
+
+```
+!!!IMPORTANT
+Async Await:
+even better way to handle asynchronous code
+```
+
+```
+Async await is a shortcut for promises
+```
+
+```
+async = makes a function return a promise
+```
+![alt text](img/image-13.png);
+![alt text](img/image-14.png)
+
+```
+The point of async feature is that async lets us ues await
+```
+
+```
+await:
+lets us wait for a promise to finish, 
+before going to the next line.
+```
+![alt text](img/image-15.png)
+![alt text](img/image-16.png)
+```
+we can only use await, when we're inside an async function.
+But the closest function has to be async function.
+```
+![alt text](img/image-17.png)
+```
+async await can only be used with promises.
+```
+
+```
+It's easier to save value
+```
+![alt text](img/image-18.png)
