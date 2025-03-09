@@ -56,9 +56,18 @@ loadProducts(() => {
         `
     });
     document.querySelector('.js-products-grid').innerHTML = productsHTML;
+    document.querySelector('.js-cart-quantity').innerHTML = cart.cartQuantity;
+    // add event listener to all add to cart buttons
+    document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
+        button.addEventListener('click', () => {
+            //get data from button
+            const { productId } = button.dataset;
+            cart.addToCart(productId);
+            showAddHint(productId);
+        });
+    })
 });
 
-document.querySelector('.js-cart-quantity').innerHTML = cart.cartQuantity;
 
 function showAddHint(productId) {
     //show added when click
@@ -76,13 +85,3 @@ function showAddHint(productId) {
     //saved timeoutId in addedToCartId
     addedToCartId = timeoutId;
 }
-
-// add event listener to all add to cart buttons
-document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
-    button.addEventListener('click', () => {
-        //get data from button
-        const { productId } = button.dataset;
-        cart.addToCart(productId);
-        showAddHint(productId);
-    });
-})
