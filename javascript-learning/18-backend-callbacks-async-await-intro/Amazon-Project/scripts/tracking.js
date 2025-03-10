@@ -21,7 +21,8 @@ async function loadPage() {
     const deliveryTime = dayjs(estimatedDeliveryTime);
     const orderTime = dayjs(order.orderTime);
     const today = dayjs();
-    const progress = ((today-orderTime)/(deliveryTime-orderTime))*100;    
+    const progress = ((today-orderTime)/(deliveryTime-orderTime))*100;
+    const deliveryMessage = today < deliveryTime ? 'Arriving on' : 'Delivered on';
     
     //TODO:as same use function later
     const estimatedDeliveryDate = dayjs(estimatedDeliveryTime).format('dddd, MMMM D');
@@ -32,7 +33,7 @@ async function loadPage() {
             </a>
 
             <div class="delivery-date">
-            Arriving on ${estimatedDeliveryDate}
+            ${deliveryMessage} ${estimatedDeliveryDate}
             </div>
 
             <div class="product-info">

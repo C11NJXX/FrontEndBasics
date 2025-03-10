@@ -118,6 +118,13 @@ class Cart {
         const text = await response.text();
         console.log(text);
     }
+
+    resetCart() {
+        this.cartItems = [];
+        this.cartQuantity = 0;
+        localStorage.setItem(this.#cartQuantityKey, this.cartQuantity);
+        this.saveCartToLocalStorage();
+    }
 }
 export const cart = new Cart('cart-oop', 'cartQuantity-oop');
 

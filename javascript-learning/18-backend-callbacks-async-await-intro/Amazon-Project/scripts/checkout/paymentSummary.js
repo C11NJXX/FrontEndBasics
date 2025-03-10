@@ -61,22 +61,25 @@ export function renderPaymentSummary() {
         `
     });
     document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
-    document.querySelector('.js-place-order').addEventListener('click', async () => {
-        try {
-            const response = await fetch('https://supersimplebackend.dev/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    cart: cart
-                })
-            });
-            const order = await response.json();
-            addOrder(order);
-        } catch (error) {
-            console.log(error);
-        }
-        window.location.href = 'orders.html'
-    });
+    if (document.querySelector('.js-place-order')) {
+        document.querySelector('.js-place-order').addEventListener('click', async () => {
+            try {
+                const response = await fetch('https://supersimplebackend.dev/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cart: cart
+                    })
+                });
+                const order = await response.json();
+                addOrder(order);
+            } catch (error) {
+                console.log(error);
+            }
+            cart.resetCart();
+            window.location.href = 'orders.html'
+        });
+    }
 };
