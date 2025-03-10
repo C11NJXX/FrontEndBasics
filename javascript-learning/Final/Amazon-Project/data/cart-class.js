@@ -101,18 +101,6 @@ class Cart {
         this.saveCartToLocalStorage();
     }
 
-    loadCart(fun) {
-        const xhr = new XMLHttpRequest();
-
-        xhr.addEventListener('load', () => {
-            console.log(xhr.response);
-            fun();
-        });
-
-        xhr.open('GET', 'https://supersimplebackend.dev/cart');
-        xhr.send();
-    }
-
     async loadCartFetch() {
         const response = await fetch('https://supersimplebackend.dev/cart');
         const text = await response.text();
@@ -126,5 +114,6 @@ class Cart {
         this.saveCartToLocalStorage();
     }
 }
+
 export const cart = new Cart('cart-oop', 'cartQuantity-oop');
 

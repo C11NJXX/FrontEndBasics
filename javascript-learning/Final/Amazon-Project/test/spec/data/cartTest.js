@@ -1,5 +1,3 @@
-// import { cart, loadFromStorage, addToCart, removeFromCart, updateDeliveryOptions } from "../../../data/cart.js";
-
 import { cart } from '../../../data/cart-class.js'
 describe('test suite: addToCart', () => {
 

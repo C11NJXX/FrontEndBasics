@@ -1,9 +1,9 @@
-// import { cart, removeFromCart, saveCartToLocalStorage, updateCartQuantity, cartQuantity, updateDeliveryOptions } from "../../data/cart.js";
-import {cart} from '../../data/cart-class.js'
+import { cart } from '../../data/cart-class.js'
 import { getProduct } from '../../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from "./paymentSummary.js";
+
 const today = dayjs();
 
 export function renderOrderSummary() {
@@ -172,10 +172,6 @@ function update(button) {
         cart.saveCartToLocalStorage();
         //update the cartQuantity
         cart.updateCartQuantity(originalQuantity, newQuantity);
-        /*
-            //update the HTML where display the cart quantity
-            document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
-        */
         renderOrderSummary();
     } else {
         alert('newQuantity must be [0,1000)!');

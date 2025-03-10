@@ -15,7 +15,6 @@ async function loadOrdersPage() {
         const orderProducts = order.products;
         console.log(orderProducts);
         //format the date
-        //TODO:Use function to handle the date
         const orderDateBeforeFormat = new dayjs(orderTime);
         const orderDate = orderDateBeforeFormat.format('MMMM D');
 
@@ -41,8 +40,7 @@ async function loadOrdersPage() {
         let ordersDetailsHTML = '';
 
         orderProducts.forEach((orderProduct) => {
-            const { productId, quantity, estimatedDeliveryTime, variation } = orderProduct;
-            //TODO:Use function to handle the date
+            const { productId, quantity, estimatedDeliveryTime } = orderProduct;
             const estimatedDeliveryTimeBeforeFormat = new dayjs(estimatedDeliveryTime);
             const estimatedDeliveryDate = estimatedDeliveryTimeBeforeFormat.format('MMMM DD');
             //get more info about product
@@ -102,7 +100,29 @@ async function loadOrdersPage() {
         const { productId } = button.dataset;
         button.addEventListener('click', () => {
             cart.addToCart(productId);
-        })
+            // (Optional) display a message that the product was added,
+            // then change it back after a second.
+            button.innerHTML = 'Added';
+            setTimeout(() => {
+                button.innerHTML = `
+            <img class="buy-again-icon" src="images/icons/buy-again.png">
+            <span class="buy-again-message">Buy it again</span>
+        `;
+            }, 1000);
+        });
+    });
+    //add eventListener to search button
+    document.querySelector('.js-search-button').addEventListener('click', () => {
+        //get the value inside input and set the url
+        const searchContent = document.querySelector('.js-search-bar').value;
+        window.location.href = `amazon.html?search=${searchContent}`;
+    });
+    document.querySelector('.js-search-bar').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            //get the value inside input and set the url
+            const searchContent = document.querySelector('.js-search-bar').value;
+            window.location.href = `amazon.html?search=${searchContent}`;
+        }
     });
 }
 

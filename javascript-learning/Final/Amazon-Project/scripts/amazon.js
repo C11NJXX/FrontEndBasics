@@ -1,4 +1,3 @@
-// import { addToCart, cartQuantity } from '../data/cart.js';
 import { cart } from '../data/cart-class.js'
 import { products, loadProductsFetch } from '../data/products.js';
 let addedToCartId;

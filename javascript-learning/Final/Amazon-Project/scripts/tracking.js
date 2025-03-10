@@ -1,5 +1,5 @@
 import { getOrder } from "../data/orders.js";
-import {getProduct, loadProductsFetch} from '../data/products.js';
+import { getProduct, loadProductsFetch } from '../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 async function loadPage() {
@@ -13,18 +13,16 @@ async function loadPage() {
     const { image, name } = product;
     let matchingProduct;
     order.products.forEach((product) => {
-        if(product.productId === productId) {
+        if (product.productId === productId) {
             matchingProduct = product;
         }
     });
-    const {quantity, estimatedDeliveryTime, variation } = matchingProduct;
+    const { quantity, estimatedDeliveryTime } = matchingProduct;
     const deliveryTime = dayjs(estimatedDeliveryTime);
     const orderTime = dayjs(order.orderTime);
     const today = dayjs();
-    const progress = ((today-orderTime)/(deliveryTime-orderTime))*100;
+    const progress = ((today - orderTime) / (deliveryTime - orderTime)) * 100;
     const deliveryMessage = today < deliveryTime ? 'Arriving on' : 'Delivered on';
-    
-    //TODO:as same use function later
     const estimatedDeliveryDate = dayjs(estimatedDeliveryTime).format('dddd, MMMM D');
     const trackingHTML = `
             <div class="order-tracking">
@@ -47,10 +45,10 @@ async function loadPage() {
             <img class="product-image" src=${image}>
 
             <div class="progress-labels-container">
-            <div class="progress-label ${(progress >= 0 && progress <=49) ? 'current-status' : ''}">
+            <div class="progress-label ${(progress >= 0 && progress <= 49) ? 'current-status' : ''}">
                 Preparing
             </div>
-            <div class="progress-label ${(progress >= 50 && progress <=99) ? 'current-status' : ''}">
+            <div class="progress-label ${(progress >= 50 && progress <= 99) ? 'current-status' : ''}">
                 Shipped
             </div>
             <div class="progress-label ${(progress >= 100) ? 'current-status' : ''} ">
