@@ -8,6 +8,7 @@ async function loadPage() {
     const orderId = url.searchParams.get('orderId');
     const productId = url.searchParams.get('productId');
     const order = getOrder(orderId);
+
     const product = getProduct(productId);
     const { image, name } = product;
     let matchingProduct;
@@ -17,6 +18,11 @@ async function loadPage() {
         }
     });
     const {quantity, estimatedDeliveryTime, variation } = matchingProduct;
+    const deliveryTime = dayjs(estimatedDeliveryTime);
+    const orderTime = dayjs(order.orderTime);
+    const today = dayjs();
+    const progress = ((today-orderTime)/(deliveryTime-orderTime))*100;    
+    
     //TODO:as same use function later
     const estimatedDeliveryDate = dayjs(estimatedDeliveryTime).format('dddd, MMMM D');
     const trackingHTML = `
@@ -40,19 +46,19 @@ async function loadPage() {
             <img class="product-image" src=${image}>
 
             <div class="progress-labels-container">
-            <div class="progress-label">
+            <div class="progress-label ${(progress >= 0 && progress <=49) ? 'current-status' : ''}">
                 Preparing
             </div>
-            <div class="progress-label current-status">
+            <div class="progress-label ${(progress >= 50 && progress <=99) ? 'current-status' : ''}">
                 Shipped
             </div>
-            <div class="progress-label">
+            <div class="progress-label ${(progress >= 100) ? 'current-status' : ''} ">
                 Delivered
             </div>
             </div>
 
             <div class="progress-bar-container">
-            <div class="progress-bar"></div>
+            <div class="progress-bar" style="width:${progress}%"></div>
             </div>
         </div>
     `;
