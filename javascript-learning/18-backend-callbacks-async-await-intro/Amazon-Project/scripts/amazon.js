@@ -10,7 +10,13 @@ loadProductsFetch().then(() => {
     let filterProducts = products;
     if (searchContent) {
         filterProducts = products.filter((product) => {
-            return product.name.includes(searchContent);
+            let matchingKeyWord = false;
+            product.keywords.forEach((keyword) => {
+                if (keyword.toLowerCase().includes(searchContent.toLowerCase())) {
+                    matchingKeyWord = true;
+                }
+            });
+            return matchingKeyWord || product.name.toLowerCase().includes(searchContent.toLowerCase());
         });
     }
     filterProducts.forEach((product) => {
