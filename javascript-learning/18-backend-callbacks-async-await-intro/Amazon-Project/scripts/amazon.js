@@ -1,11 +1,19 @@
 // import { addToCart, cartQuantity } from '../data/cart.js';
 import { cart } from '../data/cart-class.js'
-import { products, loadProducts } from '../data/products.js';
+import { products, loadProductsFetch } from '../data/products.js';
 let addedToCartId;
 
-loadProducts(() => {
+loadProductsFetch().then(() => {
     let productsHTML = '';
-    products.forEach((product) => {
+    const url = new URL(window.location.href);
+    const searchContent = url.searchParams.get('search');
+    let filterProducts = products;
+    if (searchContent) {
+        filterProducts = products.filter((product) => {
+            return product.name.includes(searchContent);
+        });
+    }
+    filterProducts.forEach((product) => {
         productsHTML += `
                 <div class="product-container">
             <div class="product-image-container">
@@ -65,9 +73,21 @@ loadProducts(() => {
             cart.addToCart(productId);
             showAddHint(productId);
         });
-    })
+    });
+    //add eventListener to search button
+    document.querySelector('.js-search-button').addEventListener('click', () => {
+        //get the value inside input and set the url
+        const searchContent = document.querySelector('.js-search-bar').value;
+        window.location.href = `amazon.html?search=${searchContent}`;
+    });
+    document.querySelector('.js-search-bar').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            //get the value inside input and set the url
+            const searchContent = document.querySelector('.js-search-bar').value;
+            window.location.href = `amazon.html?search=${searchContent}`;
+        }
+    });
 });
-
 
 function showAddHint(productId) {
     //show added when click
